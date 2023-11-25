@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Homepage List
+{% endblock%}
+  
+{% block content %}
+    <h1>Pets List</h1>
+    <form action="">
+        <button type = "submit" formaction= "/add">Add Pet</button>
+    </form>
+    
+    <section>
+
+        {% for pet in pets %}
+        <p><a href="/{{pet.id}}">{{pet.name}}</a></p>
+        <img src="{{pet.photo_url}}" alt="" width = 200>
+        {% if pet.available %}
+        <p>Available</p>
+        {% else %} 
+        <p>Not Available</p>
+        {% endif %}
+        {% endfor%}
+        
+    </section>
+{% endblock %}

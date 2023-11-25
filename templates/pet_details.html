@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Homepage List
+{% endblock%}
+  
+{% block content %}
+    <h1>Pets Details</h1>
+    <section>
+        
+        <p>name : {{pet.name}}</p>
+        <p>species : {{pet.species}}</p>
+        {% if pet.photo_url%}
+        <img src="{{pet.photo_url}}" alt="" width =200>
+        {% else%}
+        <p>photo unavailable</p>
+        {% endif%}
+        
+        {% if pet.age%}
+        <p>age : {{pet.age}}</p>
+        {% else %}
+        <p>age unkown</p>
+        {% endif%}
+        <h2>Edit Info</h2>
+        <form action="/{{pet.id}}" method = "POST">
+            {{form.hidden_tag()}}
+            {% for field in form 
+            if field.widget.input_type != 'hidden' %}
+            <p>
+            {{field.label}}
+            {{field}}
+
+            {% for error in field.errors %}
+            {{error}}
+            {% endfor %}
+            </p>
+            {% endfor %}
+            <button>Edit</button>
+        </form>
+        <form action="">
+            <button type= "submit" formaction = "/" formmethod = "GET">Home</button>
+        </form>
+        
+    </section>
+{% endblock %}
